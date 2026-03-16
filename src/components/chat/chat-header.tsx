@@ -1,6 +1,7 @@
 "use client"
 
-import { Bot } from "lucide-react"
+import { Bot, History } from "lucide-react"
+import Link from "next/link"
 import {
   Select,
   SelectContent,
@@ -8,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 
 interface ChatHeaderProps {
   category: string
@@ -25,16 +27,23 @@ export function ChatHeader({ category, onCategoryChange }: ChatHeaderProps) {
           Asistente IA Reparaelec
         </h1>
       </div>
-      <Select value={category} onValueChange={onCategoryChange}>
-        <SelectTrigger className="w-[140px]">
-          <SelectValue placeholder="Categoría" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="caldera">Caldera</SelectItem>
-          <SelectItem value="lavadora">Lavadora</SelectItem>
-          <SelectItem value="frigorifico">Frigorífico</SelectItem>
-        </SelectContent>
-      </Select>
+      <div className="flex items-center gap-2">
+        <Link href="/tecnico/historial">
+          <Button variant="ghost" size="icon" title="Ver historial">
+            <History className="size-5 text-muted-foreground hover:text-foreground" />
+          </Button>
+        </Link>
+        <Select value={category} onValueChange={onCategoryChange}>
+          <SelectTrigger className="w-[140px]">
+            <SelectValue placeholder="Categoría" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="caldera">Caldera</SelectItem>
+            <SelectItem value="lavadora">Lavadora</SelectItem>
+            <SelectItem value="frigorifico">Frigorífico</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </header>
   )
 }
