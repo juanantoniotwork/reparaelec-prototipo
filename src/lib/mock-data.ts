@@ -2,12 +2,26 @@ import { ChatSession } from './types'
 
 export type DateGroup = 'Hoy' | 'Ayer' | 'Esta semana' | 'Anteriores'
 
+export function formatTime(dateString: string): string {
+  try {
+    const date = new Date(dateString)
+    if (isNaN(date.getTime())) return '...'
+    return date.toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  } catch (e) {
+    return '...'
+  }
+}
+
 export const MOCK_SESSIONS: ChatSession[] = [
   {
     id: '1',
     title: 'Piloto caldera Junkers',
     category: 'Caldera',
     lastMessage: '¿Cómo encender el piloto de la Junkers?',
+    lastMessageAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     messages: [
       { id: '1', role: 'user', content: '¿Cómo encender el piloto de la Junkers?', timestamp: new Date().toISOString() },
@@ -19,6 +33,7 @@ export const MOCK_SESSIONS: ChatSession[] = [
     title: 'Error E15 Lavavajillas Bosch',
     category: 'Lavavajillas',
     lastMessage: 'El error E15 indica una fuga en la bandeja base.',
+    lastMessageAt: new Date(Date.now() - 86400000).toISOString(),
     updatedAt: new Date(Date.now() - 86400000).toISOString(),
     messages: [
       { id: '3', role: 'user', content: 'Error E15 Bosch', timestamp: new Date().toISOString() },

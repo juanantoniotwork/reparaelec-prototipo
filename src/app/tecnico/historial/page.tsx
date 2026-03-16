@@ -31,7 +31,7 @@ export default function HistorialPage() {
         {selectedSession ? (
           <ChatView
             session={selectedSession}
-            onClose={() => setSelectedSession(null)}
+            onBack={() => setSelectedSession(null)}
           />
         ) : (
           <EmptyState
